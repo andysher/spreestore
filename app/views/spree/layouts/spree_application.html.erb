@@ -1,0 +1,87 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]> <html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]> <html class="ie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
+
+
+  <head data-hook="inside_head">
+    <%= render :partial => 'spree/shared/head' %>
+  </head>
+
+  <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    <div class="container">
+
+      <header id="header" class="row" data-hook>
+
+        <figure id="logo" class="columns alpha six" data-hook>
+          <%= logo %>
+        </figure>
+
+        <nav id="top-nav-bar" class="columns omega ten">
+          <ul id="nav-bar" class="inline" data-hook>
+            <%= render :partial => 'spree/shared/nav_bar' %>
+          </ul>
+        </nav>
+
+        <% if store_menu? %>
+          <nav class="columns alpha omega sixteen">
+            <ul id="main-nav-bar" class="inline" data-hook>
+              <%= render :partial => 'spree/shared/store_menu' %>
+            </ul>
+          </nav>
+        <% end %>
+
+      </header>
+
+      <div id="wrapper" class="row" data-hook>
+
+        <% if content_for?(:sidebar) %>
+          <aside id="sidebar" class="columns alpha four" data-hook>
+            <%= yield :sidebar %>
+          </aside>
+        <% end %>
+
+        <div id="content" class="columns omega <% if !content_for?(:sidebar) %> sixteen alpha <% else %> twelve <% end %>" data-hook>
+          <%= breadcrumbs(@taxon) %>
+          <%= flash_messages %>
+          <%= yield %>
+        </div>
+
+      </div>
+
+      <footer id="footer" class="alpha omega sixteen columns" data-hook>
+        <div id="footer-left" class="columns alpha eight" data-hook>
+          <ul>
+	 	<div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+	  	<a href="https://twitter.com/Bhavint" class="twitter-follow-button" data-show-count="false">Follow @Bhavint</a>
+		<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.showroom.com&media=http%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fe%2Fe2%2FPs_store_logo.png" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+	  </ul>
+	  <p><%= t(:powered_by) %> <%= link_to 'Spree', 'http://spreecommerce.com/' %></p>
+        </div>
+        <div id="footer-right" class="columns omega eight" data-hook></div>
+      </footer>
+
+    </div>
+
+    <%= render :partial => 'spree/shared/google_analytics' %>
+
+  </body>
+
+</html>
+
+
